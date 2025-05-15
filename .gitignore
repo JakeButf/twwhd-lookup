@@ -1,0 +1,12 @@
+# Ignore build artifacts
+memcli
+*.exe
+
+# Ignore YAML outputs
+*.yaml
+*.yml
+
+# Go-specific
+bin/
+*.out
+
