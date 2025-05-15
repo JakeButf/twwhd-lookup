@@ -44,7 +44,7 @@ var AddressRangeMap = map[string]AddressRange{
 
 func (a AromaSource) GetData() map[string]any {
 	return map[string]any{
-		"addresses": AddressMap,
-		"ranges": AddressRangeMap,
+		"addresses": FormatAddressMap(AddressMap),
+		"ranges": FormatRangeMap(AddressRangeMap),
 	}
 }

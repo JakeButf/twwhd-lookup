@@ -14,6 +14,23 @@ type MemorySource interface {
 	GetData() map[string]any
 }
 
+func FormatAddressMap(input map[string]uint32) map[string]string {
+	result := make(map[string]string)
+	for key, val := range input {
+		result[key] = fmt.Sprintf("0x%08X", val)
+	}
+	return result
+}
+func FormatRangeMap(input map[string]AddressRange) map[string]map[string]string {
+	result := make(map[string]map[string]string)
+	for key, val := range input {
+		result[key] = map[string]string{
+			"start": fmt.Sprintf("0x%08X", val.Start),
+			"end": fmt.Sprintf("0x%08X", val.End),
+		}
+	}
+	return result
+}
 func writeYAML(filename string, data map[string]any) error {
 	file, err := os.Create(filename)
 	if err != nil {
@@ -91,10 +108,10 @@ func main() {
 		os.Exit(1)
 	}
 
-	if err := PatchAddressPrefix(*output); err != nil {
-		fmt.Println("Failed to patch prefixes: ", err)
-		os.Exit(1)
-	}
+	//if err := PatchAddressPrefix(*output); err != nil {
+	//	fmt.Println("Failed to patch prefixes: ", err)
+	//	os.Exit(1)
+	//}
 
 	fmt.Println("Wrote YAML to", *output)
 }
